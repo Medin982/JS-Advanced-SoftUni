@@ -5,15 +5,17 @@ function calculeteTime(steps, foot, speed) {
     let rest = Math.floor(distance / 500);
 
     let timeMin = Math.floor(time / 60);
-    let timeSec = Math.round(time - (timeMin * 60));
+    let timeSec = (time - (timeMin * 60)).toFixed(0);
     let timeHour = Math.floor(time / 3600);
+    timeMin += rest;
+    timeHour += Math.floor(timeMin / 60);
+    timeMin = timeMin % 60;
 
-    console.log((timeHour < 10 ? "0" : "") + timeHour + 
-    ':' + 
-    (timeMin + rest < 10 ? '0' : '') +
-     (timeMin + rest) + 
-     ':' + 
-     (timeMin < 10 ? '0' : '') + timeMin);
+    let formattedH = timeHour < 10 ? `0${timeHour}` : `${timeHour}`;
+    let formattedM = timeMin < 10 ? `0${timeMin}` : `${timeMin}`;
+    let formattedS = timeSec < 10 ? `0${timeSec}` : `${timeSec}`;
+    
+    console.log(`${formattedH}:${formattedM}:${formattedS}`)
 }
 
-calculeteTime(4000, 0.60, 5);
+calculeteTime(2564, 0.70, 5.5);

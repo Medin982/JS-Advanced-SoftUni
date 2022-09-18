@@ -1,7 +1,7 @@
 function sameNumbers(num) {
-    let numToString = String(num);
+    let numToString = num.toString();
     let isSame = true;
-    let firstDigt = numToString[1];
+    let firstDigt = numToString[0];
     let sum = 0;
     for (let i = 0; i < numToString.length; i++) {
         let current = +numToString[i];
@@ -15,3 +15,4 @@ function sameNumbers(num) {
 }
 
 sameNumbers(2222222);
+sameNumbers(1234);
