@@ -1,15 +1,20 @@
 function solve(n, k) {
-    let firstNum = Number(k);
-    let secondNum = Number(n);
-    let result = [];
-    let currentSum = 1;
-    for (let i = 0; i < n; i++) {
-        result[i] = currentSum; 
-       for(let m = 0; m < k; m++) {
-        currentSum += result[m];
-       } 
+    let result = [1];
+    let currentSum = 0;
+    for (let i = 1; i < n; i++) {
+        let count = 0;
+        for (let m = result.length - 1; m >= 0; m--) {
+            count++;
+            if (count > k) {
+                break;
+            } else {
+                currentSum += result[m];
+            }
+        }
+        result[i] = currentSum;
+        currentSum = 0;
     }
-    console.log(result);
+   return result;
 }
 
 solve(6, 3);
