@@ -21,13 +21,13 @@ function ticTacToe(coordinates) {
 
         if (chechWinner(table, marker)) {
             console.log(`Player ${marker} wins!`);
-            console.log(print(table));
+            print(table);
             return;
         }
 
         if (!checkFreeSpace(table)) {
             console.log("The game ended! Nobody wins :(");
-            console.log(print(table));
+            print(table);
             return;
         }
 
