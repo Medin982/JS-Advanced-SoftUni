@@ -28,7 +28,7 @@ function solve() {
       let sortListOfWorker = bestRestaurant.workers.sort((a, b) => b.salary - a.salary);
       let res = "";
       for (let worker of sortListOfWorker) {
-         res += `Name: ${worker.name} With Salary: ${worker.salary}`;
+         res += `Name: ${worker.name} With Salary: ${worker.salary} `;
       }
       bestWorkersInfo.textContent += res;
 
