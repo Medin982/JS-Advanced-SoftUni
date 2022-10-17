@@ -1,0 +1,3 @@
+function extendProrotype(classToExtend) {
+    // TODO:
+}
