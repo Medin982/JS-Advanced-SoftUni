@@ -39,12 +39,20 @@ function lockedProfile() {
         })
 
     function showOrHideInfo(event) {
+        const btn = event.target;
         const div = event.target.parentElement;
+        const hiddeInfo = div.getElementsByTagName("div")[0];
         const lock = div.querySelector("input[value='lock']");
         if (lock.checked) {
             return;
         }
-        const hiddeInfo = div.getElementsByClassName("hiddenInfo");
-        hiddeInfo.classList["display"] = "block";
+
+        if (btn.textContent === "Show more") {
+            hiddeInfo.removeAttribute("class");
+            btn.textContent = "Hide it";
+        } else {
+            hiddeInfo.setAttribute("class", "hiddenInfo");
+            btn.textContent = "Show more";
+        }
     }
 }
