@@ -1,7 +1,6 @@
 document.getElementById('loadBooks').addEventListener("click", loadAllBooks);
 const form = document.querySelector('form');
-let flag = false;
-form.addEventListener('submit', flag ? getBookData : sendBook);
+form.addEventListener('submit', getBookData);
 
 
 function getBookData(e) {
@@ -40,13 +39,14 @@ function editBook(e) {
             author.value = b.author;
         });
     form.removeEventListener;
-    form.addEventListener("submit", function() { 
-        sendBook(new FormData(form), bookId) });
+
+    if (form.querySelector('button').clicked == true) {
+        sendBook(new FormData(form), bookId);
+    }
 }
 
-async function sendBook(event, body, bookId) {
+async function sendBook(body, bookId) {
     //TODO 'body' and 'bookId' are undefined and request not working!!!
-   event.preventDefault();
 
    const response = await fetch(`http://localhost:3030/jsonstore/collections/books/${bookId}`, {
     method: 'PUT',
