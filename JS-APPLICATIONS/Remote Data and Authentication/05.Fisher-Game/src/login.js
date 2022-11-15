@@ -22,7 +22,8 @@ async function loginUser(body) {
         }
         const data = await response.json();
         sessionStorage.setItem('accessToken', data.accessToken);
-        sessionStorage.setItem('userData', data.email);
+        sessionStorage.setItem('userEmail', data.email);
+        sessionStorage.setItem('userId', data._id);
         window.location = './index.html';
     } catch (error) {
         errorP.textContent = error.message;

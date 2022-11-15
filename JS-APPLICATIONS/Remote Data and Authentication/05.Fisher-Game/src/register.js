@@ -31,8 +31,6 @@ async function registerUser(body) {
             throw new Error(response.statusText);
         }
         const data = await response.json();
-        sessionStorage.setItem('accessToken', data.accessToken);
-        sessionStorage.setItem('userData', data.email);
         window.location = "./login.html";
     } catch (err) {
         errorP.textContent = err.message;

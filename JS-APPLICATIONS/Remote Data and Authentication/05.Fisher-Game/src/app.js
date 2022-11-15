@@ -2,11 +2,46 @@
 document.getElementById('logout').addEventListener('click', logout);
 document.getElementsByClassName('load')[0].addEventListener('click', loadAllChatches);
 const addBtn = document.getElementsByClassName('add')[0];
-addBtn.addEventListener('submit', getCatchData);
+document.getElementById('addForm').addEventListener('submit', getCatchData);
+
+
+async function deleteCatch(event) {
+    const catchId = event.target.dataset;
+    const accessToken = sessionStorage.accessToken;
+    const response = await fetch(`http://localhost:3030/data/catches/${catchId.id}`, {
+        method: 'DELETE',
+        headers: { 'X-authorization': accessToken }
+    });
+
+    const data = await response.json();
+    loadAllChatches();
+}
 
 function getCatchData(event) {
     event.preventDefault();
-    
+    const data = Object.fromEntries(new FormData(event.target));
+    if (!data.angler || Number(data.weight) < 0 || !data.species
+        || !data.location || !data.bait || Number(data.captureTime) < 0) {
+        return;
+    }
+
+    addCatch(data);
+    event.target.reset();
+}
+
+async function addCatch(body) {
+    const accessToken = sessionStorage.accessToken;
+    const response = await fetch('http://localhost:3030/data/catches ', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-authorization': accessToken
+        },
+        body: JSON.stringify(body)
+    });
+
+    const data = await response.json();
+
 }
 
 async function loadAllChatches() {
@@ -21,8 +56,19 @@ async function loadAllChatches() {
             currentCatch.setAttribute('class', 'catch');
             currentCatch.innerHTML = catchCard(catches);
             divCatches.appendChild(currentCatch);
+            currentCatch.getElementsByClassName('delete')[0].addEventListener('click', deleteCatch);
+            showOrHideUpdateAndDeleteBtn(catches._ownerId, currentCatch);
         });
+}
 
+function showOrHideUpdateAndDeleteBtn(catchesOwnedId, catchHTMLEle) {
+    const userId = sessionStorage.userId;
+    if (catchesOwnedId !== userId) {
+        [...catchHTMLEle.querySelectorAll('button')]
+            .forEach(b => {
+                b.setAttribute('disabled', '');
+            });
+    }
 }
 
 function catchCard(catches) {
@@ -54,7 +100,7 @@ async function logout() {
 
 (function displayOrHideNavElement() {
     const accessToken = sessionStorage.accessToken;
-    const user = sessionStorage.userData;
+    const user = sessionStorage.userEmail;
     if (accessToken) {
         document.getElementById('guest').style.display = 'none';
         document.querySelector('p.email span').textContent = user;
