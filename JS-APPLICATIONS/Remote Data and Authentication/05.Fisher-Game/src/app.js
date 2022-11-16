@@ -5,6 +5,33 @@ const addBtn = document.getElementsByClassName('add')[0];
 document.getElementById('addForm').addEventListener('submit', getCatchData);
 
 
+function updateCatchData(event) {
+
+}
+
+async function updateCatch(event) {
+    const catches = {
+        'angler': 'bbb',
+        'weight': 5,
+        'species': 'bb',
+        'location': 'nn',
+        'bait': 'sdsa',
+        'captureTime': 10
+    }
+    const catchId = event.target.dataset;
+    const accessToken = sessionStorage.accessToken;
+    const response = await fetch(`http://localhost:3030/data/catches/${catchId.id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-authorization': accessToken
+        },
+        body: JSON.stringify(catches)
+    });
+
+    const data = response.json();
+}
+
 async function deleteCatch(event) {
     const catchId = event.target.dataset;
     const accessToken = sessionStorage.accessToken;
@@ -57,6 +84,7 @@ async function loadAllChatches() {
             currentCatch.innerHTML = catchCard(catches);
             divCatches.appendChild(currentCatch);
             currentCatch.getElementsByClassName('delete')[0].addEventListener('click', deleteCatch);
+            currentCatch.getElementsByClassName('update')[0].addEventListener('click', updateCatch);
             showOrHideUpdateAndDeleteBtn(catches._ownerId, currentCatch);
         });
 }
