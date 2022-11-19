@@ -2,7 +2,9 @@ const detailsSection = document.getElementById('detailsView');
 const commentForm = detailsSection.querySelector('.answer-comment');
 commentForm.querySelector('form').addEventListener('submit', onSubmit);
 const main = document.getElementsByTagName('main')[0];
+const commentUrl = `http://localhost:3030/jsonstore/collections/myboard/comments`;
 let postId;
+let postUrl = `http://localhost:3030/jsonstore/collections/myboard/posts/${postId}`;
 
 export async function showDetails(e) {
     if (typeof (e) === 'string') {
@@ -10,8 +12,6 @@ export async function showDetails(e) {
     } else {
         postId = e.target.parentElement.dataset.id;
     }
-    const getPostUrl = `http://localhost:3030/jsonstore/collections/myboard/posts/${postId}`;
-    const commentUrl = `http://localhost:3030/jsonstore/collections/myboard/comments`;
     const post = await getRequest(getPostUrl);
     const allComments = await getRequest(commentUrl);
     const comments = Object.values(allComments).filter(c => c.postId == postId);
@@ -35,7 +35,7 @@ function onSubmit(e) {
 }
 
 async function createComment(body) {
-    const response = await fetch('http://localhost:3030/jsonstore/collections/myboard/comments', {
+    const response = await fetch(commentUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body)

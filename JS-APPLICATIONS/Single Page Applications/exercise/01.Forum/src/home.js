@@ -4,6 +4,7 @@ const homeSection = document.getElementById('homeView');
 const main = document.getElementsByTagName('main')[0];
 const form = homeSection.querySelector('form');
 form.addEventListener('submit', getTopicData);
+const url = 'http://localhost:3030/jsonstore/collections/myboard/posts';
 
 export async function showHome() {
     const topicContainer = homeSection.querySelector('.topic-title');
@@ -30,14 +31,14 @@ function getTopicData(event) {
 }
 
 async function loadPost() {
-    const response = await fetch('http://localhost:3030/jsonstore/collections/myboard/posts');
+    const response = await fetch(url);
     const data = response.json();
 
     return data;
 }
 
 async function createTopic(body) {
-    const response = await fetch('http://localhost:3030/jsonstore/collections/myboard/posts', {
+    const response = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body)
