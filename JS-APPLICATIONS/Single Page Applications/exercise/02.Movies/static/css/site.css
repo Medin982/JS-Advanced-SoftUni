@@ -39,3 +39,8 @@
     text-decoration: underline;
     box-shadow: 0 5px 10px #cccccc;
 }
+
+.error-notification {
+    color: red;
+    font-weight: bold;
+}
