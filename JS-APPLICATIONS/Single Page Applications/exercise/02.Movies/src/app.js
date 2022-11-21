@@ -1,7 +1,7 @@
 import { showHome } from "./home.js";
-import { shonNavBar } from "./navBar.js";
+import { showNavBar } from "./navBar.js";
 
 window.addEventListener("load", () => {
     showHome();
-    shonNavBar();
+    showNavBar();
 });

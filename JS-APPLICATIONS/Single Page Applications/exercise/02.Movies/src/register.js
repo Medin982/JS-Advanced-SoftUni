@@ -1,5 +1,5 @@
 import { showLoginForm } from "./login.js";
-import { shonNavBar } from "./navBar.js";
+import { showNavBar } from "./navBar.js";
 
 const registerSection = document.getElementById('form-sign-up');
 const container = document.getElementById('container');
@@ -11,7 +11,7 @@ errroP.setAttribute("class", 'error-notification');
 
 export function showRegisterForm() {
     container.replaceChildren(registerSection);
-    shonNavBar();
+    showNavBar();
 }
 
 function onSubmit(event) {

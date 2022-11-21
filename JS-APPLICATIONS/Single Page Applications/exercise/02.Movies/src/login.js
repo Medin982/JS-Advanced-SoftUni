@@ -1,5 +1,5 @@
 import { showHome } from "./home.js";
-import { shonNavBar } from "./navBar.js";
+import { showNavBar } from "./navBar.js";
 
 const loginSection = document.getElementById('form-login');
 const form = loginSection.querySelector('form');
@@ -10,7 +10,7 @@ errroP.setAttribute("class", 'error-notification');
 
 export function showLoginForm() {
     container.replaceChildren(loginSection);
-    shonNavBar();
+    showNavBar();
 }
 
 function onsubmitt(e) {
