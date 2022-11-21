@@ -37,14 +37,21 @@ function getMovieData(e) {
 
 async function updataMovie(body, movieId) {
     const authToken = sessionStorage.authToken;
-    const response = await fetch(`http://localhost:3030/data/movies/${movieId}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-Authorization': authToken
-        },
-        body: JSON.stringify(body)
-    });
-
-    showMovieDetails(id);
+    try {
+        const response = await fetch(`http://localhost:3030/data/movies/${movieId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Authorization': authToken
+            },
+            body: JSON.stringify(body)
+        });
+        showMovieDetails(id);
+    } catch (error) {
+        errroP.textContent = error.message;
+        form.prepend(errroP);
+        setTimeout(() => {
+            errroP.remove();
+        }, 2000);
+    }
 }

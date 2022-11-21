@@ -24,9 +24,13 @@ export async function showMovieDetails(e) {
 }
 
 export async function getCurrentMovie(movieId) {
-   const response = await fetch(`http://localhost:3030/data/movies/${movieId}`);
-   const data = await response.json();
-   return data;
+   try {
+      const response = await fetch(`http://localhost:3030/data/movies/${movieId}`);
+      const data = await response.json();
+      return data;
+   } catch (error) {
+      return;
+   }
 }
 
 function showOrHideBtns(ownerId) {

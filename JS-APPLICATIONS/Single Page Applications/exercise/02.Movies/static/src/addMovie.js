@@ -17,14 +17,12 @@ function movieData(e) {
     e.preventDefault();
 
     const { title, description, img } = Object.fromEntries(new FormData(e.target));
-
-    c
-
     addMovie({ title, description, img });
 }
 
 async function addMovie(body) {
     const authToken = sessionStorage.authToken;
+   try {
     const response = await fetch('http://localhost:3030/data/movies', {
         method: 'POST',
         headers: {
@@ -34,4 +32,7 @@ async function addMovie(body) {
         body: JSON.stringify(body)
     });
     showHome();
+   } catch (error) {
+    return;
+   }
 }

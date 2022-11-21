@@ -9,10 +9,10 @@ const container = document.getElementById('container');
 const addMovieBtn = homeSection.querySelector('#add-movie-button');
 
 document.querySelector('.nav-item a[href="#"]')
-.addEventListener('click', logout);
+    .addEventListener('click', logout);
 
 [...document.querySelectorAll('.nav-item a')]
-.forEach(a => a.addEventListener('click', loginOrRegister));
+    .forEach(a => a.addEventListener('click', loginOrRegister));
 
 addMovieBtn.addEventListener('click', () => {
     showAddMovieForm();
@@ -28,7 +28,7 @@ export async function showHome() {
     showNavBar();
 }
 
-function createMovieCard(movies, movieList){
+function createMovieCard(movies, movieList) {
     movieList.innerHTML = '';
     movies.forEach(m => {
         const li = document.createElement('li');
@@ -53,9 +53,13 @@ function createMovieCard(movies, movieList){
 }
 
 async function getMovies() {
-    const response = await fetch('http://localhost:3030/data/movies');
-    const data = await response.json();
-    return data;
+    try {
+        const response = await fetch('http://localhost:3030/data/movies');
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        return;
+    }
 }
 
 function loginOrRegister(e) {
@@ -77,10 +81,14 @@ function showOrHideAddMovieBtn() {
 
 async function logout() {
     const authToken = sessionStorage.authToken;
-    const response = await fetch('http://localhost:3030/users/logout', {
-        method: 'GET',
-        headers: { 'X-Authorization': authToken }
-    });
-    sessionStorage.clear();
-    showHome();
+    try {
+        const response = await fetch('http://localhost:3030/users/logout', {
+            method: 'GET',
+            headers: { 'X-Authorization': authToken }
+        });
+        sessionStorage.clear();
+        showHome();
+    } catch (error) {
+        return;
+    }
 }
