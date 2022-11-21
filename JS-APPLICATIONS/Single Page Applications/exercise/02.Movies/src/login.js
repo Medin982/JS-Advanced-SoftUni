@@ -34,10 +34,9 @@ async function login(body) {
         }
 
         const data = await response.json();
-
         sessionStorage.setItem('authToken', data.accessToken);
         sessionStorage.setItem('userEmail', data.email);
-        sessionStorage.setItem('userId', data.email);
+        sessionStorage.setItem('userId', data._id);
 
         showHome();
     } catch (err) {

@@ -3,12 +3,14 @@ const container = document.getElementById('container');
 
 export function showNavBar() {
     const authToken = sessionStorage.authToken;
+    const userNav = [...nav.getElementsByClassName('nav-item user')];
+    const guestNav = [...nav.getElementsByClassName('nav-item guest')];
     if (!authToken) {
-        const userNav = [...nav.getElementsByClassName('nav-item user')];
-        userNav.forEach(e => e.remove());
+        userNav.forEach(e => e.style.display = 'none');
+        guestNav.forEach(e => e.style.display = 'block');
     } else {
-        const guestNav = [...nav.getElementsByClassName('nav-item guest')];
-        guestNav.forEach(e => e.remove());
+        guestNav.forEach(e => e.style.display = 'none');
+        userNav.forEach(e => e.style.display = 'block');
         nav.querySelector('#welcome-msg')
         .textContent = `Welcome, ${sessionStorage.userEmail}`; 
     }

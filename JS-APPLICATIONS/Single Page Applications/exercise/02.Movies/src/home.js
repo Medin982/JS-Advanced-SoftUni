@@ -29,6 +29,7 @@ export async function showHome() {
 }
 
 function createMovieCard(movies, movieList){
+    movieList.innerHTML = '';
     movies.forEach(m => {
         const li = document.createElement('li');
         li.setAttribute('class', 'card');
@@ -38,7 +39,7 @@ function createMovieCard(movies, movieList){
         const title = document.createElement('h5');
         title.textContent = m.title;
         const div = document.createElement('div');
-        div.setAttribute('id', 'movie-details-btn');
+        div.setAttribute('data-id', m._id);
         div.addEventListener('click', showMovieDetails);
         const detailsBtn = document.createElement('a');
         detailsBtn.href = '#';
@@ -75,7 +76,6 @@ function showOrHideAddMovieBtn() {
 }
 
 async function logout() {
-    debugger;
     const authToken = sessionStorage.authToken;
     const response = await fetch('http://localhost:3030/users/logout', {
         method: 'GET',

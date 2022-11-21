@@ -18,13 +18,7 @@ function movieData(e) {
 
     const { title, description, img } = Object.fromEntries(new FormData(e.target));
 
-    if (!title || !description || !img) {
-        errroP.textContent = 'Cannot be have empty fields!';
-        form.prepend(errroP);
-        setTimeout(() => {
-            errroP.remove();
-        }, 2000);
-    }
+    c
 
     addMovie({ title, description, img });
 }
