@@ -1,6 +1,6 @@
 import { deleteMovie } from "./delete.js";
 import { editMovie } from "./editMovie.js";
-import { likeMovie } from "./likes.js";
+import { getCountLikesPerMovie, likeMovie } from "./likes.js";
 import { showNavBar } from "./navBar.js";
 
 const movieSection = document.getElementById('movie-example');
@@ -17,6 +17,7 @@ export async function showMovieDetails(e) {
    movieSection.querySelector('h1').textContent = movie.title;
    movieSection.querySelector('img').src = movie.img;
    movieSection.querySelector('div p').textContent = movie.description;
+   movieSection.querySelector('span').textContent = await getCountLikesPerMovie(movieId);
    showOrHideBtns(movie._ownerId);
    container.replaceChildren(movieSection);
    showNavBar();
@@ -37,9 +38,13 @@ function showOrHideBtns(ownerId) {
             editMovie(movieId);
          });
       } else if (btn.innerHTML === 'Delete') {
-         btn.addEventListener('click', deleteMovie);
+         btn.addEventListener('click', () => {
+            deleteMovie(movieId);
+         });
       } else {
-         btn.addEventListener('click', likeMovie);
+         btn.addEventListener('click', () => {
+            likeMovie(movieId);
+         });
       }
    });
 
