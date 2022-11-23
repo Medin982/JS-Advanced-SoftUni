@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/styles/style.css">
+    <script src="./src/app.js" type="module"></script>
 </head>
 
 <body>
@@ -42,7 +43,12 @@
         </div>
     </nav>
 
-    <div class="container home wrapper  my-md-5 pl-md-5">
+    <main id="main-View">
+
+    </main>
+
+
+    <div id="home-View" class="container home wrapper  my-md-5 pl-md-5">
         <div class="d-md-flex flex-md-equal ">
             <div class="col-md-5">
                 <img class="responsive" src="./images/01.svg" />
@@ -60,7 +66,7 @@
         </div>
     </div>
 
-    <div class="container home wrapper  my-md-5 pl-md-5">
+    <div id="register-View" class="container home wrapper  my-md-5 pl-md-5">
         <div class="row-form d-md-flex flex-mb-equal ">
             <div class="col-md-4">
                 <img class="responsive" src="./images/idea.png" alt="">
@@ -76,8 +82,8 @@
                 </div>
                 <div class="form-label-group">
                     <label for="password">Password</label>
-                    <input type="password" id="password" name="password" class="form-control"
-                        placeholder="Password" required="">
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Password"
+                        required="">
                 </div>
                 <div class="form-label-group">
                     <label for="inputRepeatPassword">Repeat Password</label>
@@ -95,7 +101,7 @@
         </div>
     </div>
 
-    <div class="container home wrapper  my-md-5 pl-md-5">
+    <div id="login-View" class="container home wrapper  my-md-5 pl-md-5">
         <div class="row-form d-md-flex flex-mb-equal ">
             <div class="col-md-4">
                 <img class="responsive" src="./images/idea.png" alt="">
@@ -150,15 +156,18 @@
         <h1>No ideas yet! Be the first one :)</h1>
     </div>
 
-    <div class="container home some">
+    <div id="details-View" class="container home some">
         <img class="det-img" src="./images/dinner.jpg" />
         <div class="desc">
             <h2 class="display-5">Dinner Recipe</h2>
             <p class="infoType">Description:</p>
-            <p class="idea-description">There are few things as comforting as heaping bowl of pasta at the end of a long
-                day. With so many easy pasta recipes out there, there's something for every palate to love. That's why
+            <p class="idea-description">There are few things as comforting as heaping bowl of pasta at the end of a
+                long
+                day. With so many easy pasta recipes out there, there's something for every palate to love. That's
+                why
                 pasta
-                makes such a quick, easy dinner for your family—it's likely to satisfy everyone's cravings, due to its
+                makes such a quick, easy dinner for your family—it's likely to satisfy everyone's cravings, due to
+                its
                 versatility.</p>
         </div>
         <div class="text-center">
@@ -166,7 +175,7 @@
         </div>
     </div>
 
-    <div class="container home wrapper  my-md-5 pl-md-5">
+    <div id="create-View" class="container home wrapper  my-md-5 pl-md-5">
         <div class=" d-md-flex flex-mb-equal ">
             <div class="col-md-6">
                 <img class="responsive-ideas create" src="./images/creativity_painted_face.jpg" alt="">
