@@ -1,48 +1,25 @@
 import { logout } from "./api/user.js";
+import { initialize } from "./router.js";
 import { showCreate } from "./views/create.js";
+import { showDashboard } from "./views/dashboard.js";
 import { showHome } from "./views/home.js";
 import { showLogin } from "./views/login.js";
 import { showRegisterSec } from "./views/register.js";
 
-const main = document.getElementById('main-View');
 
-document.querySelector('nav').addEventListener('click', onNavigation);
 
 const views = {
-    'Dashboard': showHome,
+    'Dashboard': showDashboard,
     'Login': showLogin,
     'Register': showRegisterSec,
-    'Home': undefined,
+    'Home': showHome,
     'Create': showCreate,
-    'Logout': logout,
+    'Logout': async () => {
+        await logout();
+        router.goTo('Home');
+    },
 }
 
-const context = {
-    showSection,
-    goTo
-}
+const router = initialize(views);
 
-function showSection(section) {
-    main.replaceChildren(section);
-}
-
-function onNavigation(event) {
-    const target = event.target;
-    event.preventDefault();
-    
-
-    if(target.tagName === "A") {
-        const name = target.textContent;
-        goTo(name);
-    } else if (target.tagName === 'IMG') {
-        goTo('Home');
-    }
-}
-
-
-function goTo(name) {
-    const handler = views[name];
-    if (typeof(handler) == 'function') {
-        handler(context);
-    }
-}
+router.goTo('Home');

@@ -1,5 +1,5 @@
 
-const homeSec = document.getElementById('dashboard-holder');
+const homeSec = document.getElementById('home-View');
 homeSec.remove();
 
 export function showHome(context) {

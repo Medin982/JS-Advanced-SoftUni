@@ -1,7 +1,7 @@
 
 const host = 'http://localhost:3030/';
-const user = JSON.parse(sessionStorage.user);
 async function requester(method, url, body) {
+    const user = JSON.parse(sessionStorage.getItem('user'));
     const options = {
         method,
         headers: undefined
