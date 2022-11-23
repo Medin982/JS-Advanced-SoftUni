@@ -4,7 +4,8 @@ export function initialize(views) {
 
     const context = {
         showSection,
-        goTo
+        goTo,
+        updateNav
     }
 
     function showSection(section) {
@@ -24,11 +25,33 @@ export function initialize(views) {
     }
 
 
-    function goTo(name) {
+    function goTo(name, event) {
         const handler = views[name];
         if (typeof (handler) == 'function') {
+            if (name === 'Details') {
+                handler(context, event);
+            }
+            
             handler(context);
         }
+    }
+
+    function updateNav() {
+        const user = sessionStorage.user;
+        if (user) {
+            [...document.querySelectorAll('.guest')]
+                .forEach(a => a.style.display = 'none');
+
+            [...document.querySelectorAll('.user')]
+                .forEach(a => a.style.display = 'inline-block');
+        } else {
+            [...document.querySelectorAll('.guest')]
+                .forEach(a => a.style.display = 'inline-block');
+
+            [...document.querySelectorAll('.user')]
+                .forEach(a => a.style.display = 'none');
+        }
+
     }
 
     return context;

@@ -18,6 +18,6 @@ export async function register(email, password) {
 
 export async function logout() {
     await get(endPoint.logout);
-    sessionStorage.clear;
+    sessionStorage.clear();
 }
 

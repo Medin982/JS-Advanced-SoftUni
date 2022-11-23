@@ -48,6 +48,6 @@ export {
     get,
     post,
     put,
-    del as delete
+    del
 };
 
