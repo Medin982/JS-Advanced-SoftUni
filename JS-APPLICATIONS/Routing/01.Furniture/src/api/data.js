@@ -2,10 +2,10 @@ import { del, get, post, put } from "./api.js";
 
 const endPoint = {
     'allFurniture': 'data/catalog',
-    'getFurniture': 'data/catalog',
+    'getFurniture': 'data/catalog/',
     'createFurniture': 'data/catalog',
-    'updateFurniture': 'data/catalog',
-    'deletaFurniture': 'data/catalog',
+    'updateFurniture': 'data/catalog/',
+    'deletaFurniture': 'data/catalog/',
     'getMyFurniture': 'data/catalog?where=_ownerId%3D%22'
 };
 
