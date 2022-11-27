@@ -1,14 +1,24 @@
 import { html } from "../../node_modules/lit-html/lit-html.js";
-import { getFurniture } from "../api/data.js";
+import { deleteFurniture, getFurniture } from "../api/data.js";
 
-
+let furnitureId;
+let context;
 export async function showDetailsView(ctx) {
-    const id = ctx.params.id;
-    const furniture = await getFurniture(id);
+    furnitureId = ctx.params.id;
+    context = ctx.page;
+    const furniture = await getFurniture(furnitureId);
     const userId = JSON.parse(sessionStorage.getItem('userData'))._id;
     const isOwner = userId === furniture._ownerId;
+    ctx.updateNav();
     ctx.render(loadDetailFurnitureTemp(furniture, isOwner));
     
+}
+
+async function deleteItem(e) {
+    e.preventDefault();
+    confirm('Are you sure to delete item?');
+   await deleteFurniture(furnitureId);
+   context.redirect('/');
 }
 
 function loadDetailFurnitureTemp(furniture, isOwner) {
@@ -37,7 +47,7 @@ function loadDetailFurnitureTemp(furniture, isOwner) {
                 ? html`
                 <div>
                     <a href="/edit/${furniture._id}" class="btn btn-info">Edit</a>
-                    <a href="/delte/${furniture._id}" class="btn btn-red">Delete</a>
+                    <a href="/delete/${furniture._id}" @click=${deleteItem} class="btn btn-red">Delete</a>
                 </div>`
                 : ""}
             </div>

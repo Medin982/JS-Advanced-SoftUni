@@ -4,7 +4,7 @@ import { createFurniture } from "../api/data.js";
 let context;
 export function showCreateView(ctx) {
     context = ctx;
-    ctx.updataNav();
+    ctx.updateNav();
     ctx.render(loadCreateTemp());
 }
 
@@ -13,7 +13,7 @@ async function onSubmit(e) {
 
     const { make, model, year, description,
         price, img, material } = Object.fromEntries(new FormData(e.target));
-    let hasInvalid = false;
+    
     const validate = {
         'hasMake': 'is-valid',
         'hasModel': 'is-valid',
@@ -23,35 +23,10 @@ async function onSubmit(e) {
         'hasImg': 'is-valid',
     }
 
-    if (!make || make.length < 4) {
-        validate['hasMake'] = 'is-invalid';
-        hasInvalid = true;
-    }
-
-    if (!model || model.length < 4) {
-        validate['hasModel'] = 'is-invalid';
-        hasInvalid = true;
-    }
-
-    if (!year || Number(year) < 1950 || Number(year) > 2050) {
-        validate['hasYear'] = 'is-invalid';
-        hasInvalid = true;
-    }
-
-    if (!description || description.length < 10) {
-        validate['hasDescription'] = 'is-invalid';
-        hasInvalid = true;
-    }
-
-    if (!price || Number(price) < 0) {
-        validate['hasPrice'] = 'is-invalid';
-        hasInvalid = true;
-    }
-
-    if (!img) {
-        validate['hasImg'] = 'is-invalid';
-        hasInvalid = true;
-    }
+    let hasInvalid = validateInput({
+        make, model, year, description,
+        price, img, material
+    }, validate);
 
     if (hasInvalid) {
         return context.render(loadCreateTemp(validate));
@@ -91,18 +66,18 @@ function loadCreateTemp(status = {}) {
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="new-description">Description</label>
-                    <input class="form-control ${status.hasDescription}" id="new-description"  type="text"
+                    <input class="form-control ${status.hasDescription}" id="new-description" type="text"
                         name="description">
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="form-control-label" for="new-price">Price</label>
-                    <input class="form-control ${status.hasPrice}" id="new-price" type="number" name="price" >
+                    <input class="form-control ${status.hasPrice}" id="new-price" type="number" name="price">
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="new-image">Image</label>
-                    <input class="form-control ${status.hasImg}" id="new-image" type="text" name="img" >
+                    <input class="form-control ${status.hasImg}" id="new-image" type="text" name="img">
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="new-material">Material (optional)</label>
@@ -112,4 +87,40 @@ function loadCreateTemp(status = {}) {
             </div>
         </div>
     </form>`;
+}
+
+export function validateInput(inputs, validate) {
+    let hasInvalid = false;
+    
+    if (!inputs.make || inputs.make.length < 4) {
+        validate['hasMake'] = 'is-invalid';
+        hasInvalid = true;
+    }
+
+    if (!inputs.model || inputs.model.length < 4) {
+        validate['hasModel'] = 'is-invalid';
+        hasInvalid = true;
+    }
+
+    if (!inputs.year || Number(inputs.year) < 1950 || Number(inputs.year) > 2050) {
+        validate['hasYear'] = 'is-invalid';
+        hasInvalid = true;
+    }
+
+    if (!inputs.description || inputs.description.length < 10) {
+        validate['hasDescription'] = 'is-invalid';
+        hasInvalid = true;
+    }
+
+    if (!inputs.price || Number(inputs.price) < 0) {
+        validate['hasPrice'] = 'is-invalid';
+        hasInvalid = true;
+    }
+
+    if (!inputs.img) {
+        validate['hasImg'] = 'is-invalid';
+        hasInvalid = true;
+    }
+
+    return hasInvalid;
 }

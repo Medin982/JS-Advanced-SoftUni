@@ -3,7 +3,7 @@ import { allFurniture } from "../api/data.js";
 
 
 export async function showCatalog(ctx) {
-    ctx.updataNav();
+    ctx.updateNav();
     const furtunites = await allFurniture();
     ctx.render(loadCatalogTemp(furtunites));
 }

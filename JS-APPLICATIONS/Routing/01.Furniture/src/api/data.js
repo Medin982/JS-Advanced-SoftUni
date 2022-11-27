@@ -22,7 +22,7 @@ export async function createFurniture(furniture) {
 }
 
 export async function updateFurniture(id, furniture) {
-    return await put(endPoint.createFurniture + id, furniture);
+    return await put(endPoint.updateFurniture + id, furniture);
 }
 
 export async function deleteFurniture(id) {

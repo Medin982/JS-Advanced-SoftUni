@@ -18,18 +18,18 @@ page('/login', showLoginView);
 page('/register', showRegisterView);
 page('/logout', async (ctx) => {
     await logout()
-    ctx.updataNav();
+    ctx.updateNav();
     ctx.page.redirect('/');
 });
 page('/details/:id', showDetailsView);
 page('/allFurniture', showAllFurnitureView);
-page('/myFurniture/:id', showMyFurnitureView);
+page('/myFurniture', showMyFurnitureView);
 page('/edit/:id', showEditView);
 page('*', showCatalog);
 page.start();
 
 function renderMiddleware(ctx, next) {
     ctx.render = (content) => render(content, document.querySelector('.container'));
-    ctx.updataNav = updataNavBar;
+    ctx.updateNav = updataNavBar;
     next();
 }
