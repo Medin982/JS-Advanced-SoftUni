@@ -47,7 +47,7 @@ function loadDetailFurnitureTemp(furniture, isOwner) {
                 ? html`
                 <div>
                     <a href="/edit/${furniture._id}" class="btn btn-info">Edit</a>
-                    <a href="/delete/${furniture._id}" @click=${deleteItem} class="btn btn-red">Delete</a>
+                    <a @click=${deleteItem} href="javascript:void(0)" class="btn btn-red">Delete</a>
                 </div>`
                 : ""}
             </div>
