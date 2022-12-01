@@ -1,8 +1,9 @@
+import { login } from "../api/user.js";
 import { html } from "../lib.js";
 
-const loginTemp = () => html`
+const loginTemp = (onSubmit) => html`
 <section id="login-page" class="auth">
-    <form id="login">
+    <form @submit=${onSubmit} id="login">
         <h1 class="title">Login</h1>
 
         <article class="input-group">
@@ -21,5 +22,19 @@ const loginTemp = () => html`
 
 export function showLogin(ctx) {
     ctx.updateNav();
-    ctx.render(loginTemp());
+    ctx.render(loginTemp(onSubmit));
+
+    async function onSubmit(e) {
+        e.preventDefault();
+
+        const {email, password} = Object.fromEntries(new FormData(e.target));
+
+        if (!email || !password) {
+            return alert("Email and Pasword are required!");
+        }
+
+        const user = await login(email, password);
+
+        ctx.page.redirect("/");
+    }
 }
