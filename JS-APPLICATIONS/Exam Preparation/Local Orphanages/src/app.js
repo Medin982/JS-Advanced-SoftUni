@@ -2,8 +2,10 @@ import { logout } from "./api/user.js";
 import { page, render } from "./lib.js";
 import { showCreate } from "./view/create.js";
 import { showDetails } from "./view/details.js";
+import { showEdit } from "./view/edit.js";
 import { showHome } from "./view/home.js";
 import { showLogin } from "./view/login.js";
+import { showMyPosts } from "./view/myPosts.js";
 import { showNav } from "./view/nav.js";
 import { showRegister } from "./view/register.js";
 
@@ -15,10 +17,10 @@ page("/logout", (ctx) => {
     logout();
     ctx.page.redirect("/");
 });
-page("/my-posts", "home");
+page("/my-posts", showMyPosts);
 page("/create", showCreate);
 page("/details/:id", showDetails);
-page("/edit/:id", "home");
+page("/edit/:id", showEdit);
 page("*", showHome);
 
 page.start();
