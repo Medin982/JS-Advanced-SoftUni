@@ -3,6 +3,7 @@ import { page, render } from "./lib.js";
 import { showCatalog } from "./view/catalog.js";
 import { showCreate } from "./view/create.js";
 import { showDetails } from "./view/details.js";
+import { showEdit } from "./view/edit.js";
 import { showHome } from "./view/home.js";
 import { showLogin } from "./view/login.js";
 import { showNav } from "./view/nav.js";
@@ -16,7 +17,7 @@ page("/logout", (ctx) => {
         logout();
         ctx.page.redirect("/");
 });
-page("/edit/:id", "");
+page("/edit/:id", showEdit);
 page("/details/:id", showDetails);
 page("/create", showCreate);
 page("/catalog", showCatalog);
