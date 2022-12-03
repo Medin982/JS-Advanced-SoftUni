@@ -9,14 +9,14 @@ const endPoint = {
 
 async function login(email, password) {
     const user = await post(endPoint.login, { email, password });
-    addUserData({ 'id': user._id, 'email': user.email, 'accessToken': user.accessToken });
+    addUserData({ 'id': user._id, 'accessToken': user.accessToken });
     return user;
 }
 
-async function register(user) {
-    const userRes = await post(endPoint.register, user);
-    addUserData({ 'id': userRes._id, 'email': userRes.email, 'accessToken': userRes.accessToken });
-    return userRes;
+async function register(email, password) {
+    const user = await post(endPoint.register, { email, password });
+    addUserData({ 'id': user._id, 'accessToken': user.accessToken });
+    return user;
 }
 
 function logout() {

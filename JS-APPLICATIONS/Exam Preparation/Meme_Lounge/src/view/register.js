@@ -43,7 +43,7 @@ export function showRegister(ctx) {
             return alert("Cannot have empty fields!");
         }
 
-        if (password === repeatPass) {
+        if (password == repeatPass) {
             return alert("Password don\'t match!");
         }
 

@@ -1,11 +1,11 @@
 {
-    "name": "meme-lounge",
+    "name": "game-play",
     "version": "1.0.0",
-    "description": "Meme Lounge Single Page Application",
+    "description": "GamePlay Single Page Application",
     "main": "index.html",
     "scripts": {
         "test": "mocha tests",
-        "start": "http-server -a localhost -p 3000 -P http://localhost:3000?"
+        "start": "http-server -a localhost -p 3000 -P http://localhost:3000? -c-1"
     },
     "author": "",
     "license": "ISC",
